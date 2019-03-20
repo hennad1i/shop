@@ -1,0 +1,17 @@
+<div class="example-container">
+  <form [formGroup]="form">
+    <mat-form-field *ngFor="let field of fields">
+      <input matInput
+             [placeholder]="field.placeholder"
+             [formControlName]="field.key"
+             [required]="field.required"
+             [type]="field.type"
+      >
+
+      <mat-error *ngIf="form.get(field.key).errors.required">{{field.errorMessages.requiredMessage}}</mat-error>
+      <mat-error *ngIf="form.get(field.key).errors.minlength">{{field.errorMessages.lengthMessage}}</mat-error>
+      <mat-error *ngIf="form.get(field.key).errors.email">{{field.errorMessages.emailMessage}}</mat-error>
+    </mat-form-field>
+
+  </form>
+</div>

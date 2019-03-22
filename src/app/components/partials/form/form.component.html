@@ -1,17 +1,29 @@
-<div class="example-container">
-  <form [formGroup]="form">
+<div class="form-wrapper">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    
     <mat-form-field *ngFor="let field of fields">
       <input matInput
              [placeholder]="field.placeholder"
              [formControlName]="field.key"
              [required]="field.required"
              [type]="field.type"
+             autocomplete="off"
       >
-
-      <mat-error *ngIf="form.get(field.key).errors.required">{{field.errorMessages.requiredMessage}}</mat-error>
-      <mat-error *ngIf="form.get(field.key).errors.minlength">{{field.errorMessages.lengthMessage}}</mat-error>
-      <mat-error *ngIf="form.get(field.key).errors.email">{{field.errorMessages.emailMessage}}</mat-error>
+      <mat-error *ngIf="isValid(form.get(field.key), field)">{{errorMessage}}</mat-error>
     </mat-form-field>
 
+    <div class="buttons">
+      <button 
+        mat-raised-button 
+        *ngFor="let button of buttons" 
+        [type]="button.type"
+        [routerLink]="button.routerLink ? button.routerLink : null"
+        [color]="button.color ? button.color : null"
+        [disabled]="button.type === 'submit' && !form.valid"
+      >
+        {{button.text}}
+      </button>
+      
+    </div>
   </form>
 </div>

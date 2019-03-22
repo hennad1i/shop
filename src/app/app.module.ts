@@ -12,6 +12,11 @@ import {SignUpComponent} from './components/landing/sign-up/sign-up.component';
 import {LayoutComponent} from './components/landing/layout/layout.component';
 import {FormComponent} from './components/partials/form/form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CatalogComponent } from './components/partials/catalog/catalog.component';
+import { ProductsComponent } from './components/partials/products/products.component';
+import { ProductItemComponent } from './components/partials/products/product-item/product-item.component';
+import { DashboardComponent } from './components/user/dashboard/dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     SignInComponent,
     SignUpComponent,
     LayoutComponent,
-    FormComponent
+    FormComponent,
+    CatalogComponent,
+    ProductsComponent,
+    ProductItemComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

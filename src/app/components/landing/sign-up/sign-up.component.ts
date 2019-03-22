@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { LandingForm } from 'src/app/interfaces/landing/landing-form';
+import { Button } from 'src/app/interfaces/partials/button';
+import { BuildFormService } from 'src/app/services/build-form/build-form.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,9 +11,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+  data: LandingForm[] = [];
+  buttons: Button[] = [];
+  linkSubmit: string = '/sign-up';
+
+  constructor(private buildFormService: BuildFormService) {
+    this.buildData();
+    this.buildButtons();
+  }
 
   ngOnInit() {
+    this.form = this.buildFormService.buildFormService(this.data);
+  }
+
+  buildData() {
+    this.data.push(
+      {
+        type: 'text',
+        key: 'name',
+        required: true,
+        placeholder: 'Enter your name',
+        errorMessages: {
+          requiredMessage: 'You must enter a value'
+        }
+      },
+      {
+        type: 'email',
+        key: 'email',
+        email: true,
+        required: true,
+        placeholder: 'Enter your email',
+        errorMessages: {
+          emailMessage: 'Not a valid email',
+          requiredMessage: 'You must enter a value'
+        }
+      },
+      {
+        type: 'password',
+        key: 'password',
+        length: 6,
+        required: true,
+        placeholder: 'Enter your password',
+        errorMessages: {
+          lengthMessage: 'Minlength 6 symbols',
+          requiredMessage: 'You must enter a value'
+        }
+      }
+    );
+  }
+
+  buildButtons() {
+    this.buttons.push(
+      {type: 'submit', text: 'Sign up', color: 'primary'},
+      {type: 'button', text: 'Sign in', routerLink: '/sign-in'}
+    )
   }
 
 }

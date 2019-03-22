@@ -1,4 +1,4 @@
-export interface SignInForm {
+export interface LandingForm {
   key: string;
   placeholder: string;
   type: string;

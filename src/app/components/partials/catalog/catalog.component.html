@@ -1,0 +1,12 @@
+<mat-drawer-container class="content">
+  <mat-drawer mode="side" opened>
+    <div class="catalog-menu">
+      <a mat-button routerLink="/" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{ exact: true }">Phones</a>
+      <a mat-button routerLink="/notebooks" routerLinkActive="mat-accent">Notebooks</a>
+      <a mat-button routerLink="/monitors" routerLinkActive="mat-accent">Monitors</a>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

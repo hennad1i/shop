@@ -15,7 +15,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CatalogComponent } from './components/partials/catalog/catalog.component';
 import { ProductsComponent } from './components/partials/products/products.component';
 import { ProductItemComponent } from './components/partials/products/product-item/product-item.component';
-import { DashboardComponent } from './components/user/dashboard/dashboard.component';
+import { DashboardComponent as UserDashboardComponent } from './components/user/dashboard/dashboard.component';
+import { DashboardComponent as AdminDashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HttpClientModule } from '@angular/common/http';
     CatalogComponent,
     ProductsComponent,
     ProductItemComponent,
-    DashboardComponent
+    UserDashboardComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

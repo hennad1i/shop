@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit {
 
   category: string = 'phones';
   products: any[] = [];
+  search: string;
 
   length = 100;
   pageSize = 10;
@@ -34,6 +35,7 @@ export class ProductsComponent implements OnInit {
         ? 'albums' : 'todos'; 
 
     this.productServices.getProducts(this.category).subscribe(result => {
+      result = !!this.search ? result.filter(item => item.title.indexOf(this.search) > -1 ) : result;
       this.length = result.length;
       this.products = result.splice(from, this.pageSize)
     });
@@ -46,6 +48,10 @@ export class ProductsComponent implements OnInit {
   onPaginateChange(event: PageEvent){
     this.pageSize = event.pageSize;
     this.buildProductsList(this.pageSize * event.pageIndex);
+  }
+
+  searchByProducts(){
+    this.buildProductsList(0);
   }
 
 }

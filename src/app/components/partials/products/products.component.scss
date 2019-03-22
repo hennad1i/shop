@@ -16,4 +16,14 @@
     .card{
         margin: 10px;
     }
+
+    .top{
+        display: flex;
+        flex-direction: column;
+
+        .mat-form-field{
+            position: absolute;
+            left: 40px;
+        }
+    }
 }

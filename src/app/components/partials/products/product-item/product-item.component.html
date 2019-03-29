@@ -1,3 +1,22 @@
-<p>
-  product-item works!
-</p>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>{{product.name}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="product.image">
+  <mat-card-content>
+    <p class="description">
+      {{product.description}}
+    </p>
+    <p>
+      {{product.price | currency}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <ng-container [ngSwitch]="role">
+      <button mat-button *ngSwitchCase="'user'">Add</button>
+      <button mat-button *ngSwitchCase="'admin'">Edit</button>
+      <button mat-button *ngSwitchDefault>Buy</button>
+    </ng-container>
+    <button mat-button>More</button>
+  </mat-card-actions>
+</mat-card>

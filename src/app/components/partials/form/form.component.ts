@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
 import {LandingForm} from 'src/app/interfaces/landing/landing-form';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +17,10 @@ export class FormComponent implements OnInit {
   @Input() link: string;
   errorMessage: string;
 
-  constructor() {
+  constructor(
+    private authService: AuthService, 
+    private router: Router
+    ) {
   }
 
   ngOnInit() {
@@ -41,8 +46,19 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form.value);
-    console.log(this.link);
+    this.authService.login(this.form).subscribe(result => {
+      const {data, status} = result;
+
+      if(status === 'success'){
+        this.authService.setToken(data.token);
+
+        if(data.user.role === 'manager' || data.user.role === 'admin'){
+          this.router.navigate(['/admin']);
+        }
+        
+        this.router.navigate(['/user']);
+      }
+    })    
   }
 
 }

@@ -1,26 +1,10 @@
 .products-wrapper{
     padding: 20px;
 
-    .mat-card-header{
-        max-height: 26px;
-        overflow: hidden;
-    }
-
-    img{
-        width: 100%;
-        margin: 2px auto;
-        height: 180px;
-        object-fit: cover;
-    }
-
-    .card{
-        margin: 10px;
-    }
-
     .top{
         display: flex;
         flex-direction: column;
-
+    
         .mat-form-field{
             position: absolute;
             left: 40px;

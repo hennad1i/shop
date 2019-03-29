@@ -15,9 +15,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CatalogComponent } from './components/partials/catalog/catalog.component';
 import { ProductsComponent } from './components/partials/products/products.component';
 import { ProductItemComponent } from './components/partials/products/product-item/product-item.component';
-import { DashboardComponent as UserDashboardComponent } from './components/user/dashboard/dashboard.component';
-import { DashboardComponent as AdminDashboardComponent } from './components/admin/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,9 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormComponent,
     CatalogComponent,
     ProductsComponent,
-    ProductItemComponent,
-    UserDashboardComponent,
-    AdminDashboardComponent
+    ProductItemComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +40,13 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

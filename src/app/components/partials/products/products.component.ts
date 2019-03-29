@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product/product.service';
 import { Product } from 'src/app/interfaces/partials/product';
 import { PageEvent } from '@angular/material';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -12,8 +13,10 @@ import { PageEvent } from '@angular/material';
 export class ProductsComponent implements OnInit {
 
   category: string = 'phones';
-  products: any[] = [];
+  products: Product[] = [];
   search: string;
+  url: string;
+  role: string;
 
   length = 100;
   pageSize = 10;
@@ -21,21 +24,19 @@ export class ProductsComponent implements OnInit {
 
   pageEvent: PageEvent;
 
-  constructor(private router: Router, private productServices: ProductService) {
-    this.buildProductsList(0);
+  constructor(private router: Router, private productServices: ProductService, private authService: AuthService) {
   }
 
   ngOnInit() {
+    this.buildProductsList(0);
   }
 
   buildProductsList(from: number){
-    this.category = this.router.url === '/' 
-      ? 'posts' 
-      : this.router.url === '/notebooks' 
-        ? 'albums' : 'todos'; 
+    this.url = this.router.url.substring(1);
+    this.category = !this.url.length ? 'phones' : this.url;
 
     this.productServices.getProducts(this.category).subscribe(result => {
-      result = !!this.search ? result.filter(item => item.title.indexOf(this.search) > -1 ) : result;
+      result = !!this.search ? result.filter(item => item.name.toLocaleLowerCase().indexOf(this.search.toLocaleLowerCase()) > -1 ) : result;
       this.length = result.length;
       this.products = result.splice(from, this.pageSize)
     });

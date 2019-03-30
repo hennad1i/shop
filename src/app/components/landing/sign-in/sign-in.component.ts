@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {BuildFormService} from '../../../services/build-form/build-form.service';
-import {LandingForm} from '../../../interfaces/landing/landing-form';
-import { Button } from 'src/app/interfaces/partials/button';
+import {LandingForm} from '../../../interfaces/landing-form';
+import {Button} from 'src/app/interfaces/button';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +14,7 @@ export class SignInComponent implements OnInit {
   form: FormGroup;
   data: LandingForm[] = [];
   buttons: Button[] = [];
-  linkSubmit: string = '/sign-in';
+  linkSubmit = '/sign-in';
 
   constructor(private buildFormService: BuildFormService) {
     this.buildData();
@@ -55,7 +55,7 @@ export class SignInComponent implements OnInit {
     this.buttons.push(
       {type: 'submit', text: 'Sign in', color: 'primary'},
       {type: 'button', text: 'Sign up', routerLink: '/sign-up'}
-    )
+    );
   }
 
 }

@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { BuildFormService } from './build-form.service';
+import {BuildFormService} from './build-form.service';
 
 describe('BuildFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

@@ -1,6 +1,6 @@
 <div class="form-wrapper">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    
+
     <mat-form-field *ngFor="let field of fields">
       <input matInput
              [placeholder]="field.placeholder"
@@ -13,9 +13,9 @@
     </mat-form-field>
 
     <div class="buttons">
-      <button 
-        mat-raised-button 
-        *ngFor="let button of buttons" 
+      <button
+        mat-raised-button
+        *ngFor="let button of buttons"
         [type]="button.type"
         [routerLink]="button.routerLink ? button.routerLink : null"
         [color]="button.color ? button.color : null"
@@ -23,7 +23,7 @@
       >
         {{button.text}}
       </button>
-      
+
     </div>
   </form>
 </div>

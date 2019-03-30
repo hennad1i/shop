@@ -1,21 +1,21 @@
 <div class="products-wrapper">
-    <div class="top">
-      <mat-form-field>
-        <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="search" (input)="searchByProducts()">
-      </mat-form-field>  
+  <div class="top">
+    <mat-form-field>
+      <input matInput placeholder="Search" autocomplete="off" [(ngModel)]="search" (input)="searchByProducts()">
+    </mat-form-field>
 
-      <mat-paginator [length]="length"
-        [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions"
-        (page)="onPaginateChange($event)">
-      </mat-paginator>
-    </div>
-    
-    <mat-grid-list cols="5" rowHeight="400px">
-      <mat-grid-tile *ngFor="let product of products">
-    
-          <app-product-item [product]="product" [role]="role"></app-product-item>
-    
-      </mat-grid-tile>
-    </mat-grid-list>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="onPaginateChange($event)">
+    </mat-paginator>
+  </div>
+
+  <mat-grid-list cols="5" rowHeight="400px">
+    <mat-grid-tile *ngFor="let product of products">
+
+      <app-product-item [product]="product" [role]="role"></app-product-item>
+
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

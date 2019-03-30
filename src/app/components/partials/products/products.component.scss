@@ -1,13 +1,13 @@
-.products-wrapper{
-    padding: 20px;
+.products-wrapper {
+  padding: 20px;
 
-    .top{
-        display: flex;
-        flex-direction: column;
-    
-        .mat-form-field{
-            position: absolute;
-            left: 40px;
-        }
+  .top {
+    display: flex;
+    flex-direction: column;
+
+    .mat-form-field {
+      position: absolute;
+      left: 40px;
     }
+  }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { LandingForm } from 'src/app/interfaces/landing/landing-form';
-import { Button } from 'src/app/interfaces/partials/button';
-import { BuildFormService } from 'src/app/services/build-form/build-form.service';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {LandingForm} from 'src/app/interfaces/landing-form';
+import {Button} from 'src/app/interfaces/button';
+import {BuildFormService} from 'src/app/services/build-form/build-form.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +14,7 @@ export class SignUpComponent implements OnInit {
   form: FormGroup;
   data: LandingForm[] = [];
   buttons: Button[] = [];
-  linkSubmit: string = '/sign-up';
+  linkSubmit = '/sign-up';
 
   constructor(private buildFormService: BuildFormService) {
     this.buildData();
@@ -65,7 +65,7 @@ export class SignUpComponent implements OnInit {
     this.buttons.push(
       {type: 'submit', text: 'Sign up', color: 'primary'},
       {type: 'button', text: 'Sign in', routerLink: '/sign-in'}
-    )
+    );
   }
 
 }

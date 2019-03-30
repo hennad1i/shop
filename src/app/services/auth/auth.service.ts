@@ -17,7 +17,7 @@ export class AuthService {
   }
 
   loginOrRegister(form: FormGroup, link: string): Observable<any> {
-    if (link === 'sign-in') {
+    if (link === '/sign-in') {
       return this.http.post(`${url}/login`, form.value);
     } else {
       return this.http.post(`${url}/register`, form.value);

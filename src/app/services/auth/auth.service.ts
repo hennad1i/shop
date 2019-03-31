@@ -28,6 +28,14 @@ export class AuthService {
     return this.http.get<User>(`${url}/user`);
   }
 
+  setUser(user: User) {
+    this.user = user;
+  }
+
+  currentUser(): User {
+    return this.user;
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/']);

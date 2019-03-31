@@ -13,10 +13,9 @@
   </mat-card-content>
   <mat-card-actions>
     <ng-container [ngSwitch]="role">
-      <button mat-button *ngSwitchCase="'user'">Add</button>
+      <button mat-button *ngSwitchCase="'user'" (click)="addProductToBasket(product)">Add to basket</button>
       <button mat-button *ngSwitchCase="'admin'">Edit</button>
       <button mat-button *ngSwitchDefault>Buy</button>
     </ng-container>
-    <button mat-button>More</button>
   </mat-card-actions>
 </mat-card>

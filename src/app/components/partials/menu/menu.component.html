@@ -1,0 +1,36 @@
+<mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar-row>
+    <span>
+      <mat-icon>shopping_cart</mat-icon>
+      Shop
+    </span>
+
+    <ng-container [ngSwitch]="getRole()">
+
+      <ng-container *ngSwitchCase="['user']">
+        <div class="basket">
+          <button mat-button [matMenuTriggerFor]="menu" [matBadge]="basketItems.length" matBadgePosition="before"
+                  matBadgeColor="warn">
+            <mat-icon>shopping_basket</mat-icon>
+            Basket
+          </button>
+          <mat-menu #menu="matMenu">
+            <div mat-menu-item *ngFor="let item of basketItems" (click)="$event.stopPropagation();">
+              <span>{{item.name}}</span>
+              <span class="count">х <input matInput type="number" min="1" [(ngModel)]="item.basketCount" (keyup)="changeInput($event.target.value, item)" autocomplete="off"></span>
+              <span>= {{item.price * item.basketCount | currency}}</span>
+            </div>
+          </mat-menu>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault>
+        <a mat-button routerLink="/">Home</a>
+        <a mat-button routerLink="/sign-in">Sign in</a>
+        <a mat-button routerLink="/sign-up">Sign up</a>
+      </ng-container>
+
+    </ng-container>
+
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,9 +1,14 @@
 <mat-drawer-container class="content">
   <mat-drawer mode="side" opened>
     <div class="catalog-menu">
-      <a mat-button routerLink="/" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{ exact: true }">Phones</a>
-      <a mat-button routerLink="/notebooks" routerLinkActive="mat-accent">Notebooks</a>
-      <a mat-button routerLink="/monitors" routerLinkActive="mat-accent">Monitors</a>
+      <a mat-button [routerLink]="user ? ['./'] : ['/']" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{ exact: true }">Phones</a>
+      <a mat-button [routerLink]="user ? ['notebooks'] : ['/notebooks']" routerLinkActive="mat-accent">Notebooks</a>
+      <a mat-button [routerLink]="user ? ['monitors'] : ['/monitors']" routerLinkActive="mat-accent">Monitors</a>
+
+      <ng-container *ngIf="user">
+        <span></span>
+        <a mat-button (click)="logout()">Logout</a>
+      </ng-container>
     </div>
   </mat-drawer>
   <mat-drawer-content>

@@ -36,6 +36,7 @@ export class AuthGuard implements CanActivate {
       return this.authService.getUser()
         .pipe(
           map(result => {
+            this.authService.setUser(result);
             if (currentUrl.indexOf(result.role) > -1 && result.role === 'user') {
               return true;
             } else if (currentUrl.indexOf(result.role) > -1 && result.role !== 'user') {

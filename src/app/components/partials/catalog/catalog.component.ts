@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from '../../../interfaces/user';
+import {AuthService} from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-catalog',
@@ -7,10 +9,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CatalogComponent implements OnInit {
 
-  constructor() {
+  @Input() user: User;
+
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

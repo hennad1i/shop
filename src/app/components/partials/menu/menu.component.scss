@@ -1,0 +1,66 @@
+.toolbar {
+  span {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    mat-icon {
+      margin-right: 5px;
+    }
+  }
+
+  .basket {
+
+    mat-icon {
+      margin-right: 10px;
+    }
+
+    position: absolute;
+    right: 16px;
+    display: flex;
+    align-items: center;
+
+    .mat-badge-content {
+      justify-content: center;
+    }
+  }
+}
+
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+  width: 50px;
+  height: 30px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+
+
+.mat-menu-item{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  & span{
+    flex-grow: 1;
+    text-align: left;
+
+    &:nth-child(3){
+      text-align: right;
+    }
+
+    &:first-child{
+      min-width: 100px;
+    }
+  }
+
+  .count{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    width: 30px;
+  }
+}
+

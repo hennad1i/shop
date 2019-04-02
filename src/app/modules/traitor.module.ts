@@ -9,6 +9,8 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BasketComponent} from '../components/partials/basket/basket.component';
 import {ModalComponent} from '../components/partials/modal/modal.component';
+import { StatisticComponent } from '../components/admin/statistic/statistic.component';
+import { StatisticItemComponent } from '../components/admin/statistic/statistic-item/statistic-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {ModalComponent} from '../components/partials/modal/modal.component';
     ProductsComponent,
     ProductItemComponent,
     BasketComponent,
-    ModalComponent
+    ModalComponent,
+    StatisticComponent,
+    StatisticItemComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import {ModalComponent} from '../components/partials/modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
     BasketComponent,
-    ModalComponent
+    ModalComponent,
+    StatisticComponent,
+    StatisticItemComponent
   ],
   entryComponents: [ModalComponent]
 })

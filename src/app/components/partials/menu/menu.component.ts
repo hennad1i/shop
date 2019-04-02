@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../../../interfaces/user';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,19 +8,14 @@ import {User} from '../../../interfaces/user';
 })
 export class MenuComponent implements OnInit {
 
-  @Input() user: User;
+  role: string = null;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
-  }
-
-  getRole() {
-    if (this.user) {
-      return this.user.role;
+    if (this.authService.currentUser()) {
+      this.role = this.authService.currentUser().role;
     }
-    return null;
   }
-
 }

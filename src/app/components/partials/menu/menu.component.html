@@ -5,10 +5,15 @@
       Shop
     </span>
 
-    <ng-container [ngSwitch]="getRole()">
+    <ng-container [ngSwitch]="role">
 
       <ng-container *ngSwitchCase="['user']">
         <app-basket></app-basket>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="['admin']">
+        <a mat-button routerLink="/admin">Products</a>
+        <a mat-button routerLink="/admin/statistic">Statistic</a>
       </ng-container>
 
       <ng-container *ngSwitchDefault>

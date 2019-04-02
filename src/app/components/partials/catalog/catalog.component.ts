@@ -9,12 +9,13 @@ import {AuthService} from '../../../services/auth/auth.service';
 })
 export class CatalogComponent implements OnInit {
 
-  @Input() user: User;
+  user: User;
 
   constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
+    this.user = this.authService.currentUser()
   }
 
   logout() {

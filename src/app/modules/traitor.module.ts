@@ -11,6 +11,7 @@ import {BasketComponent} from '../components/partials/basket/basket.component';
 import {ModalComponent} from '../components/partials/modal/modal.component';
 import { StatisticComponent } from '../components/admin/statistic/statistic.component';
 import { StatisticItemComponent } from '../components/admin/statistic/statistic-item/statistic-item.component';
+import { ChartModule } from './chart.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StatisticItemComponent } from '../components/admin/statistic/statistic-
     MaterialModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartModule
   ],
   exports: [
     MaterialModule,

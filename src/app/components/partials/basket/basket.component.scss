@@ -1,0 +1,72 @@
+.cdk-text-field-autofill-monitored:not(:-webkit-autofill) {
+    width: 50px;
+    height: 30px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+}
+
+.mat-menu-item{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    & span{
+        flex-grow: 1;
+        text-align: left;
+        min-width: 80px;
+
+        &:nth-child(3){
+        text-align: right;
+        }
+    }
+
+    .count{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+        width: 30px;
+    }
+}
+
+.total{
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.basket {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+        margin-right: 10px;
+    }
+
+    .mat-badge-content {
+        justify-content: center;
+    }
+}
+
+.basket-items-wrapper{
+    max-height: 240px;
+    overflow: hidden;
+    overflow-y: auto;
+
+    mat-icon{
+        margin: 0;
+        top: 10px;
+        position: relative;
+        z-index: 3;
+    }
+}

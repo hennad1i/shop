@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Product} from 'src/app/interfaces/product';
 import {AuthService} from '../../../../services/auth/auth.service';
 import {ProductService} from '../../../../services/product/product.service';
+import {ModalService} from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-product-item',
@@ -13,7 +14,7 @@ export class ProductItemComponent implements OnInit {
   @Input() product: Product;
   @Input() role: string;
 
-  constructor(private authService: AuthService, private productService: ProductService) {
+  constructor(private authService: AuthService, private productService: ProductService, private modalServise: ModalService) {
   }
 
   ngOnInit() {
@@ -28,6 +29,10 @@ export class ProductItemComponent implements OnInit {
       name: product.name,
       basketCount: 1
     });
+  }
+
+  openSigninModal() {
+    this.modalServise.openSigninModal();
   }
 
 }

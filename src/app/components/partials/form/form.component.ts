@@ -3,6 +3,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 import {LandingForm} from 'src/app/interfaces/landing-form';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-form',
@@ -19,7 +20,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) {
   }
 
@@ -60,6 +62,13 @@ export class FormComponent implements OnInit {
 
         this.router.navigate(['/user']);
       }
+
+      if(status === 'error'){
+        this.modalService.openErrorModal(result.message.email);
+      }
+    },
+    error => {
+      this.modalService.openErrorModal(error.error.message);
     });
   }
 

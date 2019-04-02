@@ -8,20 +8,7 @@
     <ng-container [ngSwitch]="getRole()">
 
       <ng-container *ngSwitchCase="['user']">
-        <div class="basket">
-          <button mat-button [matMenuTriggerFor]="menu" [matBadge]="basketItems.length" matBadgePosition="before"
-                  matBadgeColor="warn">
-            <mat-icon>shopping_basket</mat-icon>
-            Basket
-          </button>
-          <mat-menu #menu="matMenu">
-            <div mat-menu-item *ngFor="let item of basketItems" (click)="$event.stopPropagation();">
-              <span>{{item.name}}</span>
-              <span class="count">х <input matInput type="number" min="1" [(ngModel)]="item.basketCount" (keyup)="changeInput($event.target.value, item)" autocomplete="off"></span>
-              <span>= {{item.price * item.basketCount | currency}}</span>
-            </div>
-          </mat-menu>
-        </div>
+        <app-basket></app-basket>
       </ng-container>
 
       <ng-container *ngSwitchDefault>

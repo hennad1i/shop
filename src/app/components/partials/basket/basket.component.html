@@ -1,0 +1,24 @@
+<div class="basket">
+  <button mat-button [matMenuTriggerFor]="menu" [matBadge]="basketItems.length" matBadgePosition="before"
+          matBadgeColor="warn">
+    <mat-icon>shopping_basket</mat-icon>
+    Basket
+  </button>
+  <mat-menu #menu="matMenu">
+    <div class="basket-items-wrapper" *ngIf="basketItems.length">
+      <div mat-menu-item *ngFor="let item of basketItems" (click)="$event.stopPropagation();">
+        <span>{{item.name}}</span>
+        <span class="count">х <input matInput type="number" [min]="minItems" [max]="maxItems" [(ngModel)]="item.basketCount" (ngModelChange)="changeInput($event, item)" autocomplete="off"></span>
+        <span>= {{item.price * item.basketCount | currency}}</span>
+        <mat-icon (click)="$event.stopPropagation(); removeItem(item.id)">delete_forever</mat-icon>
+      </div>
+    </div>
+    <div *ngIf="basketItems.length" (click)="$event.stopPropagation();">
+      <hr>
+      <div class="total">
+        <span>Total: {{total | currency}}</span>
+        <button mat-button (click)="makeAnOrder()">Make an order</button>
+      </div>
+    </div>
+  </mat-menu>
+</div>

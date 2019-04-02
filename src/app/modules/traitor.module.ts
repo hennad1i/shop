@@ -7,13 +7,17 @@ import {ProductsComponent} from '../components/partials/products/products.compon
 import {ProductItemComponent} from '../components/partials/products/product-item/product-item.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BasketComponent} from '../components/partials/basket/basket.component';
+import {ModalComponent} from '../components/partials/modal/modal.component';
 
 @NgModule({
   declarations: [
     CatalogComponent,
     MenuComponent,
     ProductsComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    BasketComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -29,8 +33,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ProductsComponent,
     ProductItemComponent,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    BasketComponent,
+    ModalComponent
+  ],
+  entryComponents: [ModalComponent]
 })
 export class TraitorModule {
 }

@@ -1,0 +1,15 @@
+<mat-dialog-content>
+  <div>
+    {{data.message}}
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" mat-dialog-close *ngIf="data.url; else close" [routerLink]="data.url">
+    Ok
+  </button>
+  <ng-template #close>
+    <button mat-raised-button color="primary" mat-dialog-close>
+      Close
+    </button>
+  </ng-template>
+</mat-dialog-actions>

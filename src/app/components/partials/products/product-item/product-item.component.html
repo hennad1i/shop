@@ -15,7 +15,7 @@
     <ng-container [ngSwitch]="role">
       <button mat-button *ngSwitchCase="'user'" (click)="addProductToBasket(product)">Add to basket</button>
       <button mat-button *ngSwitchCase="'admin'">Edit</button>
-      <button mat-button *ngSwitchDefault>Buy</button>
+      <button mat-button *ngSwitchDefault (click)="openSigninModal()">Buy</button>
     </ng-container>
   </mat-card-actions>
 </mat-card>

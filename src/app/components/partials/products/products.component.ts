@@ -16,15 +16,17 @@ export class ProductsComponent implements OnInit {
 
   category: string;
   products: Product[] = [];
+  productsAll: Product[] = [];
   search: string;
   url: string;
   role: string;
   user: User;
 
-  length = 100;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-  pageIndex: number;
+  length;
+  pageSize;
+  pageSizeOptions: number[] = [];
+  pageIndex: number = 0;
+  cols: number;
 
   constructor(private router: Router, private productServices: ProductService, private authService: AuthService, private modalService: ModalService) {
   }
@@ -32,6 +34,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.user = this.authService.currentUser();
     this.buildProductsList(0);
+    this.responsive(window.innerWidth);
 
     this.productServices.updateProductsEvent.subscribe(() => {
       this.buildProductsList(this.pageSize * this.pageIndex);
@@ -58,6 +61,7 @@ export class ProductsComponent implements OnInit {
     this.productServices.getProducts(this.category).subscribe(result => {
       result = !!this.search ? result.filter(item => item.name.toLocaleLowerCase().indexOf(this.search.toLocaleLowerCase()) > -1) : result;
       this.length = result.length;
+      this.productsAll = result;
       this.products = result.splice(from, this.pageSize);
     });
   }
@@ -70,6 +74,33 @@ export class ProductsComponent implements OnInit {
 
   searchByProducts() {
     this.buildProductsList(0);
+  }
+
+  onResize(event) {
+    this.responsive(event.target.innerWidth)
+  }
+
+  responsive(width: number) {
+
+    if(width <= 500){
+      this.cols = 1;
+    }
+
+    if((500 < width) && (width <= 1024)){
+      this.cols = 2;
+    }
+
+    if((1024 < width) && (width <= 1440)){
+      this.cols = 3;
+    }
+
+    if(width > 1440){
+      this.cols = 5;
+    }
+
+    this.pageSize = this.cols * 2;
+    this.pageSizeOptions = [this.pageSize, this.pageSize * 2, this.pageSize * 5];
+    this.products = this.productsAll.slice(this.pageSize * this.pageIndex, (this.pageSize * this.pageIndex) + this.pageSize);
   }
 
 }

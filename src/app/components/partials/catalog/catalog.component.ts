@@ -10,8 +10,10 @@ import {AuthService} from '../../../services/auth/auth.service';
 export class CatalogComponent implements OnInit {
 
   user: User;
+  screenWidth;
 
   constructor(private authService: AuthService) {
+    this.responsive();
   }
 
   ngOnInit() {
@@ -20,6 +22,13 @@ export class CatalogComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  responsive() {
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      this.screenWidth = window.innerWidth;
+    };
   }
 
 }

@@ -11,7 +11,7 @@
     </mat-paginator>
   </div>
 
-  <mat-grid-list cols="5" rowHeight="400px">
+  <mat-grid-list [cols]="cols" rowHeight="400px" (window:resize)="onResize($event)">
     <mat-grid-tile *ngFor="let product of products">
 
       <app-product-item [product]="product" [role]="role"></app-product-item>

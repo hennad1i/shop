@@ -6,8 +6,12 @@
     flex-direction: column;
 
     .mat-form-field {
-      position: absolute;
-      left: 40px;
+      position: static;
+
+      @media (min-width: 768px) {
+        position: absolute;
+        left: 40px;
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from 'src/app/components/partials/modal/modal.component';
+import { Product } from 'src/app/interfaces/product';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,27 @@ export class ModalService {
         message: message
       }
     })
+  }
+
+  openEditModal(product: Product){
+    this.dialog.open(ModalComponent, {
+      width: '400px',
+      data: {
+        product: product
+      }
+    })
+  }
+
+  openSuccessModal(){
+    this.dialog.open(ModalComponent, {
+      width: '300px',
+      data: {
+        message: 'Update successful'
+      }
+    })
+  }
+
+  closeModal() {
+    this.dialog.closeAll();
   }
 }

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Product} from 'src/app/interfaces/product';
 import {HttpClient} from '@angular/common/http';
 import {url} from 'src/app/app.const';
+import { ModalService } from '../modal/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class ProductService {
 
   total: number = 0;
   getTotalEvent: EventEmitter<number> = new EventEmitter();
+
+  updateProductsEvent: EventEmitter<number> = new EventEmitter();
+  errorModalEvent: EventEmitter<number> = new EventEmitter();
 
   constructor(private http: HttpClient) {
   }
@@ -52,5 +56,17 @@ export class ProductService {
 
   clearBasket() {
     this.productsInBasket = [];
+  }
+
+  editProduct(product: Product): Observable<Product>{
+    return this.http.put<Product>(`${url}/product`, product);
+  }
+
+  updateProducts() {
+    this.updateProductsEvent.emit()
+  }
+
+  errorModal(){
+    this.errorModalEvent.emit()
   }
 }

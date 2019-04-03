@@ -17,12 +17,14 @@ export class FormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() link: string;
   errorMessage: string;
+  submitted: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private modalService: ModalService
   ) {
+    this.submitted = false;
   }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     this.authService.loginOrRegister(this.form, this.link).subscribe(result => {
       const {data, status} = result;
 
@@ -65,10 +68,12 @@ export class FormComponent implements OnInit {
 
       if(status === 'error'){
         this.modalService.openErrorModal(result.message.email);
+        this.submitted = false;
       }
     },
     error => {
       this.modalService.openErrorModal(error.error.message);
+      this.submitted = false;
     });
   }
 

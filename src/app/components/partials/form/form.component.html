@@ -19,7 +19,7 @@
         [type]="button.type"
         [routerLink]="button.routerLink ? button.routerLink : null"
         [color]="button.color ? button.color : null"
-        [disabled]="button.type === 'submit' && !form.valid"
+        [disabled]="(button.type === 'submit' && !form.valid) || (button.type === 'submit' && submitted)"
       >
         {{button.text}}
       </button>

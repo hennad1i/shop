@@ -5,6 +5,7 @@ import {Product} from 'src/app/interfaces/product';
 import {PageEvent} from '@angular/material';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {User} from '../../../interfaces/user';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-products',
@@ -23,13 +24,25 @@ export class ProductsComponent implements OnInit {
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageIndex: number;
 
-  constructor(private router: Router, private productServices: ProductService, private authService: AuthService) {
+  constructor(private router: Router, private productServices: ProductService, private authService: AuthService, private modalService: ModalService) {
   }
 
   ngOnInit() {
     this.user = this.authService.currentUser();
     this.buildProductsList(0);
+
+    this.productServices.updateProductsEvent.subscribe(() => {
+      this.buildProductsList(this.pageSize * this.pageIndex);
+      this.modalService.closeModal();
+      this.modalService.openSuccessModal();
+    })
+
+    this.productServices.errorModalEvent.subscribe(() => {
+      this.modalService.closeModal();
+      this.modalService.openErrorModal('An error has occurred. Please try again later');
+    })
   }
 
   buildProductsList(from: number = 0) {
@@ -51,6 +64,7 @@ export class ProductsComponent implements OnInit {
 
   onPaginateChange(event: PageEvent) {
     this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
     this.buildProductsList(this.pageSize * event.pageIndex);
   }
 

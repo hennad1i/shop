@@ -13,7 +13,7 @@ export class ProductService {
   productsInBasket: Product[] = [];
   getProductsInBasketEvent: EventEmitter<Product[]> = new EventEmitter();
 
-  total: number = 0;
+  total = 0;
   getTotalEvent: EventEmitter<number> = new EventEmitter();
 
   updateProductsEvent: EventEmitter<number> = new EventEmitter();

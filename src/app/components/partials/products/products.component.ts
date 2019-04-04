@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from 'src/app/services/product/product.service';
 import {Product} from 'src/app/interfaces/product';
@@ -6,13 +6,14 @@ import {PageEvent} from '@angular/material';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {User} from '../../../interfaces/user';
 import {ModalService} from 'src/app/services/modal/modal.service';
+import {Subscribable} from 'rxjs';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
   category: string;
   products: Product[] = [];
@@ -29,6 +30,9 @@ export class ProductsComponent implements OnInit {
   pageIndex = 0;
   cols: number;
 
+  subscribeUpdate;
+  subscribeModal;
+
   constructor(private router: Router,
               private productServices: ProductService,
               private authService: AuthService,
@@ -39,17 +43,21 @@ export class ProductsComponent implements OnInit {
     this.user = this.authService.currentUser();
     this.responsive(window.innerWidth);
 
-    this.productServices.updateProductsEvent.subscribe(() => {
+    this.subscribeUpdate = this.productServices.updateProductsEvent.subscribe(() => {
       this.buildProductsList(this.pageSize * this.pageIndex);
       this.modalService.closeModal();
-      setTimeout(() => this.modalService.openSuccessModal(), 500);
-
+      this.modalService.openSuccessModal();
     });
 
-    this.productServices.errorModalEvent.subscribe(() => {
+    this.subscribeModal = this.productServices.errorModalEvent.subscribe(() => {
       this.modalService.closeModal();
-      setTimeout(() => this.modalService.openErrorModal('An error has occurred. Please try again later'), 500);
+      this.modalService.openErrorModal('An error has occurred. Please try again later');
     });
+  }
+
+  ngOnDestroy() {
+    this.subscribeUpdate.unsubscribe();
+    this.subscribeModal.unsubscribe();
   }
 
   buildProductsList(from: number = 0) {

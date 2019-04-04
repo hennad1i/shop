@@ -1,0 +1,11 @@
+.use-wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+
+    .middle{
+        padding: 20px;
+        width: 100%;
+        max-width: 600px;
+    }
+}

@@ -8,5 +8,21 @@
       margin-right: 5px;
     }
   }
+
+  .warn{
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 56px;
+    z-index: 2;
+
+    @media (min-width: 500px) {
+      position: static;
+    }
+  }
+
+  .fg-1{
+    flex-grow: 1;
+  }
 }
 

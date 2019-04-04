@@ -6,6 +6,7 @@ import {SignUpComponent} from './components/landing/sign-up/sign-up.component';
 import {LayoutComponent} from './components/landing/layout/layout.component';
 import {ProductsComponent} from './components/partials/products/products.component';
 import {AuthGuard} from './guards/auth.guard';
+import { UseComponent } from './components/landing/use/use.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
         ]
       },
       {path: 'sign-in', component: SignInComponent},
-      {path: 'sign-up', component: SignUpComponent}
+      {path: 'sign-up', component: SignUpComponent},
+      {path: 'use', component: UseComponent},
     ], canActivate: [AuthGuard]
   },
   {path: 'user', loadChildren: './modules/user.module#UserModule', canActivate: [AuthGuard]},

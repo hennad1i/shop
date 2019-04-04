@@ -39,12 +39,13 @@ export class ProductsComponent implements OnInit {
     this.productServices.updateProductsEvent.subscribe(() => {
       this.buildProductsList(this.pageSize * this.pageIndex);
       this.modalService.closeModal();
-      this.modalService.openSuccessModal();
+      setTimeout(() => this.modalService.openSuccessModal(), 500)
+      
     })
 
     this.productServices.errorModalEvent.subscribe(() => {
       this.modalService.closeModal();
-      this.modalService.openErrorModal('An error has occurred. Please try again later');
+      setTimeout(() => this.modalService.openErrorModal('An error has occurred. Please try again later'), 500)
     })
   }
 

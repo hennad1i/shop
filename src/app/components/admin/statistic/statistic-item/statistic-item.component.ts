@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 const minYear = 2015;
@@ -26,6 +26,8 @@ export class StatisticItemComponent implements OnInit {
   dataSource;
   data;
   caption;
+  resizeTimer;
+  @ViewChild('chart') chart: ElementRef;
 
   constructor(private router: Router) {
     const split = this.router.url.split('/');
@@ -58,7 +60,7 @@ export class StatisticItemComponent implements OnInit {
       "data": randomData
     }
 
-    this.width = '100%';
+    this.width = '90%';
     this.height = '80%';
     this.type = 'line';
     this.dataFormat = 'json';
@@ -67,6 +69,15 @@ export class StatisticItemComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onResize() {
+    clearTimeout(this.resizeTimer);
+    this.resizeTimer = setTimeout(() => {
+      setTimeout(() => {
+        this.width = this.chart.nativeElement.offsetWidth;
+      }, 0);
+    }, 200);
   }
 
 }

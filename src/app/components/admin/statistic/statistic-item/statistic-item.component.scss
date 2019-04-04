@@ -1,6 +1,11 @@
 .chart-wrapper{
-    margin: 30px;
+    margin: 50px 30px 30px 30px;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+    height: 80%;
+
+    @media (min-width: 1025px) {
+        margin: 30px;
+    }
 }

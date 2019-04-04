@@ -15,5 +15,18 @@
         }
       }
     }
+
+    mat-icon{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.12);
+      border-left: none;
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      z-index: 2;
+    }
   }
   

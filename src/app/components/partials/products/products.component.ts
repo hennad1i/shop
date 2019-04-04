@@ -21,6 +21,7 @@ export class ProductsComponent implements OnInit {
   url: string;
   role: string;
   user: User;
+  resizeTimer;
 
   length;
   pageSize;
@@ -33,7 +34,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authService.currentUser();
-    this.buildProductsList(0);
     this.responsive(window.innerWidth);
 
     this.productServices.updateProductsEvent.subscribe(() => {
@@ -63,7 +63,8 @@ export class ProductsComponent implements OnInit {
       this.length = result.length;
       this.productsAll = result;
       this.products = result.splice(from, this.pageSize);
-    });
+    }, 
+    error => this.modalService.openErrorModal('An error has occurred. Please try again later'));
   }
 
   onPaginateChange(event: PageEvent) {
@@ -82,25 +83,30 @@ export class ProductsComponent implements OnInit {
 
   responsive(width: number) {
 
-    if(width <= 500){
-      this.cols = 1;
-    }
+    clearTimeout(this.resizeTimer);
+    this.resizeTimer = setTimeout(() => {
+      if(width <= 500){
+        this.cols = 1;
+      }
+  
+      if((500 < width) && (width <= 1024)){
+        this.cols = 2;
+      }
+  
+      if((1024 < width) && (width <= 1440)){
+        this.cols = 3;
+      }
+  
+      if(width > 1440){
+        this.cols = 5;
+      }
+  
+      this.pageSize = this.cols * 2;
+      this.pageSizeOptions = [this.pageSize, this.pageSize * 2, this.pageSize * 5];
 
-    if((500 < width) && (width <= 1024)){
-      this.cols = 2;
-    }
-
-    if((1024 < width) && (width <= 1440)){
-      this.cols = 3;
-    }
-
-    if(width > 1440){
-      this.cols = 5;
-    }
-
-    this.pageSize = this.cols * 2;
-    this.pageSizeOptions = [this.pageSize, this.pageSize * 2, this.pageSize * 5];
-    this.products = this.productsAll.slice(this.pageSize * this.pageIndex, (this.pageSize * this.pageIndex) + this.pageSize);
+      this.buildProductsList(this.pageSize * this.pageIndex);
+    }, 500);
+    
   }
 
 }

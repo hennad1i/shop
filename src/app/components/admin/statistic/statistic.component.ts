@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-statistic',
@@ -10,15 +11,25 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class StatisticComponent implements OnInit {
 
   user: User;
+  screenWidth;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.user = this.authService.currentUser()
+    this.user = this.authService.currentUser();
+    this.responsive();
   }
 
   logout() {
     this.authService.logout();
+  }
+
+  responsive() {
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      this.screenWidth = window.innerWidth;
+    };
   }
 
 }

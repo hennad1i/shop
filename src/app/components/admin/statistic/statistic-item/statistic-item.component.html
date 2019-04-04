@@ -1,5 +1,5 @@
-<div class="chart-wrapper">
-  <fusioncharts
+<div class="chart-wrapper" (window:resize)="onResize()" #chart>
+    <fusioncharts
       [width]="width"
       [height]="height"
       [type]="type"

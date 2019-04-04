@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 <mat-drawer-container class="content">
-    <mat-drawer mode="side" opened>
+    <mat-drawer [opened]="screenWidth > 1024 || opened" [mode]="(screenWidth > 1024) ? 'side' : 'over'" #sidenav>
         <div class="catalog-menu">
         <a mat-button [routerLink]="user ? ['./'] : ['/']" routerLinkActive="mat-accent" [routerLinkActiveOptions]="{ exact: true }">Phones</a>
         <a mat-button [routerLink]="user ? ['notebooks'] : ['/notebooks']" routerLinkActive="mat-accent">Notebooks</a>
@@ -13,6 +13,7 @@
         </div>
     </mat-drawer>
     <mat-drawer-content>
+        <mat-icon *ngIf="screenWidth <= 1024" (click)="sidenav.opened = true">menu</mat-icon>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

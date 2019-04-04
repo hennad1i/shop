@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../../interfaces/user';
 import {AuthService} from '../../../services/auth/auth.service';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-catalog',
@@ -11,13 +12,14 @@ export class CatalogComponent implements OnInit {
 
   user: User;
   screenWidth;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(private authService: AuthService) {
-    this.responsive();
   }
 
   ngOnInit() {
     this.user = this.authService.currentUser()
+    this.responsive();
   }
 
   logout() {

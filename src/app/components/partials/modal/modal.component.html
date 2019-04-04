@@ -3,7 +3,7 @@
     {{data.message}}
   </div>
   <div *ngIf="product">
-    
+
     <div class="modal-body">
       <h2>{{product.name}}</h2>
 
@@ -27,7 +27,7 @@
   </button>
   <ng-template #close>
     <button mat-raised-button color="primary" *ngIf="product" (click)="editProduct(product)" [disabled]="submitted">
-        Edit
+      Edit
     </button>
     <button mat-raised-button color="primary" mat-dialog-close>
       Close

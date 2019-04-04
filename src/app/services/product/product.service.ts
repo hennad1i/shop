@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {Product} from 'src/app/interfaces/product';
 import {HttpClient} from '@angular/common/http';
 import {url} from 'src/app/app.const';
-import { ModalService } from '../modal/modal.service';
+import {ModalService} from '../modal/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,15 +58,15 @@ export class ProductService {
     this.productsInBasket = [];
   }
 
-  editProduct(product: Product): Observable<Product>{
+  editProduct(product: Product): Observable<Product> {
     return this.http.put<Product>(`${url}/product`, product);
   }
 
   updateProducts() {
-    this.updateProductsEvent.emit()
+    this.updateProductsEvent.emit();
   }
 
-  errorModal(){
-    this.errorModalEvent.emit()
+  errorModal() {
+    this.errorModalEvent.emit();
   }
 }

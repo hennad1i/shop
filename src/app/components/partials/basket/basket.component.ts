@@ -27,26 +27,26 @@ export class BasketComponent implements OnInit {
     setTimeout(() => {
       if (!value && value < 1) {
         item.basketCount = this.minItems;
-      } 
-  
-      if(item.count < value) {
+      }
+
+      if (item.count < value) {
         item.basketCount = item.count;
       }
-  
-      if(value > this.maxItems) {
+
+      if (value > this.maxItems) {
         item.basketCount = this.maxItems;
       }
 
       this.total = this.productService.getTotal();
-    }, 0)
+    }, 0);
   }
 
-  removeItem(id: number){
+  removeItem(id: number) {
     this.productService.removeItemInBasket(id);
     this.total = this.productService.getTotal();
   }
 
-  makeAnOrder(){
+  makeAnOrder() {
     this.productService.clearBasket();
     this.basketItems = [];
     this.modalService.openOrderModal();

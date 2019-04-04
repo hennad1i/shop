@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { User } from 'src/app/interfaces/user';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { MatSidenav } from '@angular/material';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {User} from 'src/app/interfaces/user';
+import {AuthService} from 'src/app/services/auth/auth.service';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-statistic',
@@ -14,7 +14,8 @@ export class StatisticComponent implements OnInit {
   screenWidth;
   @ViewChild('sidenav') sidenav: MatSidenav;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.user = this.authService.currentUser();

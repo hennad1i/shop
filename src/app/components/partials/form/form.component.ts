@@ -3,7 +3,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 import {LandingForm} from 'src/app/interfaces/landing-form';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {Router} from '@angular/router';
-import { ModalService } from 'src/app/services/modal/modal.service';
+import {ModalService} from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-form',
@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() link: string;
   errorMessage: string;
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(
     private authService: AuthService,
@@ -54,27 +54,27 @@ export class FormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.authService.loginOrRegister(this.form, this.link).subscribe(result => {
-      const {data, status} = result;
+        const {data, status} = result;
 
-      if (status === 'success') {
-        localStorage.setItem('token', data.token);
+        if (status === 'success') {
+          localStorage.setItem('token', data.token);
 
-        if (data.user.role === 'manager' || data.user.role === 'admin') {
-          this.router.navigate(['/admin']);
+          if (data.user.role === 'manager' || data.user.role === 'admin') {
+            this.router.navigate(['/admin']);
+          }
+
+          this.router.navigate(['/user']);
         }
 
-        this.router.navigate(['/user']);
-      }
-
-      if(status === 'error'){
-        this.modalService.openErrorModal(result.message.email);
+        if (status === 'error') {
+          this.modalService.openErrorModal(result.message.email);
+          this.submitted = false;
+        }
+      },
+      error => {
+        this.modalService.openErrorModal(error.error.message);
         this.submitted = false;
-      }
-    },
-    error => {
-      this.modalService.openErrorModal(error.error.message);
-      this.submitted = false;
-    });
+      });
   }
 
 }

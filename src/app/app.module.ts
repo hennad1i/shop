@@ -12,7 +12,7 @@ import {FormComponent} from './components/partials/form/form.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './token.interceptor';
 import {TraitorModule} from './modules/traitor.module';
-import { UseComponent } from './components/landing/use/use.component';
+import {UseComponent} from './components/landing/use/use.component';
 
 @NgModule({
   declarations: [

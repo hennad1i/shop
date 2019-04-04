@@ -8,7 +8,9 @@
     <div class="basket-items-wrapper" *ngIf="basketItems.length">
       <div mat-menu-item *ngFor="let item of basketItems" (click)="$event.stopPropagation();">
         <span>{{item.name}}</span>
-        <span class="count">х <input matInput type="number" [min]="minItems" [max]="maxItems" [(ngModel)]="item.basketCount" (ngModelChange)="changeInput($event, item)" autocomplete="off"></span>
+        <span class="count">х <input matInput type="number" [min]="minItems" [max]="maxItems"
+                                     [(ngModel)]="item.basketCount" (ngModelChange)="changeInput($event, item)"
+                                     autocomplete="off"></span>
         <span>= {{item.price * item.basketCount | currency}}</span>
         <mat-icon (click)="$event.stopPropagation(); removeItem(item.id)">delete_forever</mat-icon>
       </div>

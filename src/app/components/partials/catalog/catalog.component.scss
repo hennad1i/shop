@@ -10,15 +10,15 @@
       flex-direction: column;
       height: calc(100vh - 84px);
 
-      span{
+      span {
         flex-grow: 1;
       }
     }
   }
 
-  mat-icon{
+  mat-icon {
     background: #fff;
-    border: 1px solid rgba(0,0,0,.12);
+    border: 1px solid rgba(0, 0, 0, .12);
     border-left: none;
     position: fixed;
     width: 40px;

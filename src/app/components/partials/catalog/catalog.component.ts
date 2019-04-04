@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../../interfaces/user';
 import {AuthService} from '../../../services/auth/auth.service';
-import { MatSidenav } from '@angular/material';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-catalog',
@@ -18,7 +18,7 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.authService.currentUser()
+    this.user = this.authService.currentUser();
     this.responsive();
   }
 

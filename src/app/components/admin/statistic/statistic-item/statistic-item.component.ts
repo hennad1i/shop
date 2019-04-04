@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
 
 const minYear = 2015;
 const maxYear = 2019;
@@ -9,7 +9,7 @@ let randomData = [];
 
 let randYear = (max, min) => {
   return Math.ceil(Math.random() * (max - min) + min);
-}
+};
 
 @Component({
   selector: 'app-statistic-item',
@@ -38,34 +38,38 @@ export class StatisticItemComponent implements OnInit {
       randomData.push({
         label: randYear(maxYear, minYear),
         value: randYear(maxValue, minValue)
-      })
+      });
     }
 
     randomData = randomData.sort((a, b) => {
-      if (a.label > b.label) {return 1;}
-      if (a.label < b.label) {return -1;}
+      if (a.label > b.label) {
+        return 1;
+      }
+      if (a.label < b.label) {
+        return -1;
+      }
       return 0;
-    })
+    });
 
     this.data = {
-      "chart": {
-        "caption": "Sales "+ this.caption,
-        "yaxisname": "Thousands $",
-        "subcaption": "[2015-2019]",
-        "numbersuffix": " $",
-        "rotatelabels": "1",
-        "setadaptiveymin": "1",
-        "theme": "fusion"
+      'chart': {
+        'caption': 'Sales ' + this.caption,
+        'yaxisname': 'Thousands $',
+        'subcaption': '[2015-2019]',
+        'numbersuffix': ' $',
+        'rotatelabels': '1',
+        'setadaptiveymin': '1',
+        'theme': 'fusion'
       },
-      "data": randomData
-    }
+      'data': randomData
+    };
 
     this.width = '90%';
     this.height = '80%';
     this.type = 'line';
     this.dataFormat = 'json';
     this.dataSource = this.data;
-    
+
   }
 
   ngOnInit() {

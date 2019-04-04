@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { FusionChartsModule } from 'angular-fusioncharts';
+import {FusionChartsModule} from 'angular-fusioncharts';
 
 // Load FusionCharts
 import * as FusionCharts from 'fusioncharts';
@@ -25,4 +25,5 @@ FusionChartsModule.fcRoot(
   ],
   exports: [FusionChartsModule]
 })
-export class ChartModule { }
+export class ChartModule {
+}

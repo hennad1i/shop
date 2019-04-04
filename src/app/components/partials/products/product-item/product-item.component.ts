@@ -35,7 +35,7 @@ export class ProductItemComponent implements OnInit {
     this.modalServise.openSigninModal();
   }
 
-  openEditModal(product: Product){
+  openEditModal(product: Product) {
     this.modalServise.openEditModal(product);
   }
 }

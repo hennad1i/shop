@@ -5,7 +5,7 @@ import {Product} from 'src/app/interfaces/product';
 import {PageEvent} from '@angular/material';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {User} from '../../../interfaces/user';
-import { ModalService } from 'src/app/services/modal/modal.service';
+import {ModalService} from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-products',
@@ -26,10 +26,13 @@ export class ProductsComponent implements OnInit {
   length;
   pageSize;
   pageSizeOptions: number[] = [];
-  pageIndex: number = 0;
+  pageIndex = 0;
   cols: number;
 
-  constructor(private router: Router, private productServices: ProductService, private authService: AuthService, private modalService: ModalService) {
+  constructor(private router: Router,
+              private productServices: ProductService,
+              private authService: AuthService,
+              private modalService: ModalService) {
   }
 
   ngOnInit() {
@@ -39,14 +42,14 @@ export class ProductsComponent implements OnInit {
     this.productServices.updateProductsEvent.subscribe(() => {
       this.buildProductsList(this.pageSize * this.pageIndex);
       this.modalService.closeModal();
-      setTimeout(() => this.modalService.openSuccessModal(), 500)
-      
-    })
+      setTimeout(() => this.modalService.openSuccessModal(), 500);
+
+    });
 
     this.productServices.errorModalEvent.subscribe(() => {
       this.modalService.closeModal();
-      setTimeout(() => this.modalService.openErrorModal('An error has occurred. Please try again later'), 500)
-    })
+      setTimeout(() => this.modalService.openErrorModal('An error has occurred. Please try again later'), 500);
+    });
   }
 
   buildProductsList(from: number = 0) {
@@ -60,12 +63,15 @@ export class ProductsComponent implements OnInit {
     }
 
     this.productServices.getProducts(this.category).subscribe(result => {
-      result = !!this.search ? result.filter(item => item.name.toLocaleLowerCase().indexOf(this.search.toLocaleLowerCase()) > -1) : result;
-      this.length = result.length;
-      this.productsAll = result;
-      this.products = result.splice(from, this.pageSize);
-    }, 
-    error => this.modalService.openErrorModal('An error has occurred. Please try again later'));
+        result = !!this.search
+          ? result.filter(item => item.name.toLocaleLowerCase().indexOf(this.search.toLocaleLowerCase()) > -1)
+          : result;
+
+        this.length = result.length;
+        this.productsAll = result;
+        this.products = result.splice(from, this.pageSize);
+      },
+      error => this.modalService.openErrorModal('An error has occurred. Please try again later'));
   }
 
   onPaginateChange(event: PageEvent) {
@@ -79,35 +85,35 @@ export class ProductsComponent implements OnInit {
   }
 
   onResize(event) {
-    this.responsive(event.target.innerWidth)
+    this.responsive(event.target.innerWidth);
   }
 
   responsive(width: number) {
 
     clearTimeout(this.resizeTimer);
     this.resizeTimer = setTimeout(() => {
-      if(width <= 500){
+      if (width <= 500) {
         this.cols = 1;
       }
-  
-      if((500 < width) && (width <= 1024)){
+
+      if ((500 < width) && (width <= 1024)) {
         this.cols = 2;
       }
-  
-      if((1024 < width) && (width <= 1440)){
+
+      if ((1024 < width) && (width <= 1440)) {
         this.cols = 3;
       }
-  
-      if(width > 1440){
+
+      if (width > 1440) {
         this.cols = 5;
       }
-  
+
       this.pageSize = this.cols * 2;
       this.pageSizeOptions = [this.pageSize, this.pageSize * 2, this.pageSize * 5];
 
       this.buildProductsList(this.pageSize * this.pageIndex);
     }, 500);
-    
+
   }
 
 }

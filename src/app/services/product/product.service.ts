@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {Product} from 'src/app/interfaces/product';
 import {HttpClient} from '@angular/common/http';
 import {url} from 'src/app/app.const';
-import {ModalService} from '../modal/modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,7 @@ export class ProductService {
 
   updateProductsEvent: EventEmitter<number> = new EventEmitter();
   errorModalEvent: EventEmitter<number> = new EventEmitter();
+  maxCountItem: EventEmitter<number> = new EventEmitter();
 
   constructor(private http: HttpClient) {
   }
@@ -35,7 +35,9 @@ export class ProductService {
     const findIndex = this.productsInBasket.findIndex(item => item.id === product.id);
 
     findIndex > -1
-      ? this.productsInBasket[findIndex].basketCount++
+      ? !(this.productsInBasket[findIndex].basketCount > 9) 
+        ? this.productsInBasket[findIndex].basketCount++
+        : this.maxCountItem.emit()
       : this.productsInBasket.push(product);
 
     this.sumTotal();

@@ -14,10 +14,14 @@ export class BasketComponent implements OnInit {
   minItems = 1;
   maxItems = 10;
   total = 0;
+  modalSubscribe;
+  endTimeout;
+  errorMessage;
 
   constructor(private productService: ProductService, private modalService: ModalService) {
     productService.getProductsInBasketEvent.subscribe(result => this.basketItems = result);
     productService.getTotalEvent.subscribe(result => this.total = result);
+    productService.maxCountItem.subscribe(() => modalService.openErrorModal('Max count items - 10'));
   }
 
   ngOnInit() {
@@ -25,19 +29,23 @@ export class BasketComponent implements OnInit {
 
   changeInput(value, item: Product) {
     setTimeout(() => {
+      this.errorMessage = '';
       if (!value && value < 1) {
         item.basketCount = this.minItems;
-      }
-
-      if (item.count < value) {
-        item.basketCount = item.count;
+        this.errorMessage = 'Min count items 1';
       }
 
       if (value > this.maxItems) {
         item.basketCount = this.maxItems;
+        this.errorMessage = 'Max count items 10';
       }
 
       this.total = this.productService.getTotal();
+      
+      if(this.errorMessage.length){
+        clearTimeout(this.endTimeout);
+        this.endTimeout = setTimeout(() => this.modalService.openErrorModal(this.errorMessage), 100);
+      }
     }, 0);
   }
 
